@@ -23,7 +23,6 @@ namespace ai
                 creators["cc"] = &hunter::StrategyFactoryInternal::cc;
                 creators["boost"] = &hunter::StrategyFactoryInternal::boost;
                 creators["pet"] = &hunter::StrategyFactoryInternal::pet;
-                creators["melee switch"] = &hunter::StrategyFactoryInternal::melee_switch;
             }
 
         private:
@@ -33,7 +32,6 @@ namespace ai
             static Strategy* cc(PlayerbotAI* ai) { return new CcPlaceholderStrategy(ai); }
             static Strategy* boost(PlayerbotAI* ai) { return new BoostPlaceholderStrategy(ai); }
             static Strategy* pet(PlayerbotAI* ai) { return new HunterPetStrategy(ai); }
-            static Strategy* melee_switch(PlayerbotAI* ai) { return new HunterMeleeSwitchStrategy(ai); }
         };
 
         class AoeSituationStrategyFactoryInternal : public NamedObjectContext<Strategy>

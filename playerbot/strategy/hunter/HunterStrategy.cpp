@@ -55,6 +55,14 @@ void HunterStrategy::InitCombatTriggers(std::list<TriggerNode*>& triggers)
     ClassStrategy::InitCombatTriggers(triggers);
 
     triggers.push_back(new TriggerNode(
+        "switch to ranged",
+        NextAction::array(0, new NextAction("switch to ranged", ACTION_INTERRUPT + 3), NULL)));
+
+    triggers.push_back(new TriggerNode(
+        "switch to melee",
+        NextAction::array(0, new NextAction("switch to melee", ACTION_MOVE), NULL)));
+
+    triggers.push_back(new TriggerNode(
         "counterattack",
         NextAction::array(0, new NextAction("counterattack", ACTION_HIGH + 2), NULL)));
 
@@ -509,6 +517,14 @@ void HunterStrategy::InitCombatTriggers(std::list<TriggerNode*>& triggers)
     ClassStrategy::InitCombatTriggers(triggers);
 
     triggers.push_back(new TriggerNode(
+        "switch to ranged",
+        NextAction::array(0, new NextAction("switch to ranged", ACTION_INTERRUPT + 3), NULL)));
+
+    triggers.push_back(new TriggerNode(
+        "switch to melee",
+        NextAction::array(0, new NextAction("switch to melee", ACTION_MOVE), NULL)));
+
+    triggers.push_back(new TriggerNode(
         "counterattack",
         NextAction::array(0, new NextAction("counterattack", ACTION_HIGH + 2), NULL)));
 
@@ -947,6 +963,14 @@ NextAction** HunterStrategy::GetDefaultCombatActions()
 void HunterStrategy::InitCombatTriggers(std::list<TriggerNode*>& triggers)
 {
     ClassStrategy::InitCombatTriggers(triggers);
+
+    triggers.push_back(new TriggerNode(
+        "switch to ranged",
+        NextAction::array(0, new NextAction("switch to ranged", ACTION_INTERRUPT + 3), NULL)));
+
+    triggers.push_back(new TriggerNode(
+        "switch to melee",
+        NextAction::array(0, new NextAction("switch to melee", ACTION_MOVE), NULL)));
 
     triggers.push_back(new TriggerNode(
         "counterattack",
@@ -1432,15 +1456,4 @@ void HunterPetStrategy::InitNonCombatTriggers(std::list<TriggerNode*>& triggers)
     triggers.push_back(new TriggerNode(
         "often",
         NextAction::array(0, new NextAction("initialize pet", ACTION_NORMAL + 1), NULL)));
-}
-
-void HunterMeleeSwitchStrategy::InitCombatTriggers(std::list<TriggerNode *> &triggers)
-{
-    triggers.push_back(new TriggerNode(
-        "switch to ranged",
-        NextAction::array(0, new NextAction("switch to ranged", ACTION_INTERRUPT + 3), NULL)));
-
-    triggers.push_back(new TriggerNode(
-        "switch to melee",
-        NextAction::array(0, new NextAction("switch to melee", ACTION_MOVE), NULL)));
 }
