@@ -235,7 +235,7 @@ namespace ai
                 (target->GetVictim() != bot ||
                 target->IsImmobilizedState() ||
                 (target->GetSpeed(MOVE_RUN) <= (bot->GetSpeed(MOVE_RUN) / 2) && !((!bot->GetPet() || bot->GetPet()->IsDead()) && target->IsCreature() && target->GetHealthPercent() < 50.f && target->GetHealth() < bot->GetHealth())) ||
-                distance >= 8.0f);
+                distance > 8.0f);
         }
     };
 
