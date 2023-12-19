@@ -291,4 +291,14 @@ namespace ai
         void InitCombatTriggers(std::list<TriggerNode*>& triggers) override;
         void InitNonCombatTriggers(std::list<TriggerNode*>& triggers) override;
     };
+
+    class HunterMeleeSwitchStrategy : public Strategy
+    {
+    public:
+        HunterMeleeSwitchStrategy(PlayerbotAI* ai) : Strategy(ai) {}
+        string getName() override { return "melee switch"; }
+
+    private:
+        void InitCombatTriggers(std::list<TriggerNode*>& triggers) override;
+    };
 }
