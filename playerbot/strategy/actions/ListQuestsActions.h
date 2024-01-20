@@ -26,4 +26,11 @@ namespace ai
         void ListQuests(Player* requester, QuestListFilter filter, QuestTravelDetail travelDetail = QUEST_TRAVEL_DETAIL_NONE);
         int ListQuests(Player* requester, bool completed, bool silent, QuestTravelDetail travelDetail);
     };
+
+    class QuestRewardAction : public ChatCommandAction
+    {
+      public:
+        QuestRewardAction(PlayerbotAI* ai) : ChatCommandAction(ai, "quest reward") {}
+        virtual bool Execute(Event& event) override;
+    };
 }

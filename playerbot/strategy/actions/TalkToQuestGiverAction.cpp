@@ -182,8 +182,11 @@ void TalkToQuestGiverAction::RewardMultipleItem(Player* requester, Quest const* 
 
     set<uint32> bestIds;
     ostringstream outid;
-    if (!ai->IsAlt() || sPlayerbotAIConfig.autoPickReward == "yes")
-    {
+    auto questRewardOption = ai->GetQuestRewardOptionType();
+    if (!ai->IsAlt() ||
+        questRewardOption == PlayerbotAI::QUEST_REWARD_CONFIG_DRIVEN && sPlayerbotAIConfig.autoPickReward == "yes" ||
+        questRewardOption == PlayerbotAI::QUEST_REWARD_OPTION_AUTO
+    ) {
         //Pick the first item of the best rewards.
         bestIds = BestRewards(quest);
         ItemPrototype const* proto = sObjectMgr.GetItemPrototype(quest->RewChoiceItemId[*bestIds.begin()]);
@@ -195,13 +198,14 @@ void TalkToQuestGiverAction::RewardMultipleItem(Player* requester, Quest const* 
 
         bot->RewardQuest(quest, *bestIds.begin(), questGiver, true);
     }
-    else if (sPlayerbotAIConfig.autoPickReward == "no")
-    {   
+    else if (questRewardOption == PlayerbotAI::QUEST_REWARD_CONFIG_DRIVEN && sPlayerbotAIConfig.autoPickReward == "no" ||
+             questRewardOption == PlayerbotAI::QUEST_REWARD_OPTION_LIST
+    ) {
         // Old functionality, list rewards.
-        AskToSelectReward(requester, quest, out, false);       
+        AskToSelectReward(requester, quest, out, false);
     }
-    else 
-    {   
+    else
+    {
         // Try to pick the usable item. If multiple list usable rewards.
         bestIds = BestRewards(quest);
         if (bestIds.size() > 0)

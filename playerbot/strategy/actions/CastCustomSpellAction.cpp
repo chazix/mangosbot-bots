@@ -214,6 +214,8 @@ bool CastCustomSpellAction::Execute(Event& event)
     MotionMaster& mm = *bot->GetMotionMaster();
     uint32 spellDuration = sPlayerbotAIConfig.globalCoolDown;
 
+    // don't use reagent cheat if the bot is an alt of a real player
+    bool reagentCheat = !ai->IsAlt();
     bool result = spell ? ai->CastSpell(spell, target, itemTarget,true, &spellDuration) : ai->CastSpell(text, target, itemTarget, true, &spellDuration);
     if (result)
     {
