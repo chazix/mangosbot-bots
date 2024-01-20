@@ -248,6 +248,14 @@ enum BotRoles
     BOT_ROLE_DPS = 0x04
 };
 
+enum QuestRewardOptionType
+{
+  QUEST_REWARD_CONFIG_DRIVEN = 0x00,
+  QUEST_REWARD_OPTION_AUTO   = 0x01,
+  QUEST_REWARD_OPTION_LIST   = 0x02,
+  QUEST_REWARD_OPTION_ASK    = 0x03
+};
+
 class PacketHandlingHelper
 {
 public:
@@ -431,6 +439,9 @@ public:
     void AccelerateRespawn(Creature* creature, float accelMod = 0);
     void AccelerateRespawn(ObjectGuid guid, float accelMod = 0) { Creature* creature = GetCreature(guid); if (creature) AccelerateRespawn(creature,accelMod); }
 
+    QuestRewardOptionType GetQuestRewardOptionType() { return m_questRewardOption; };
+    void SetQuestRewardOptionType(QuestRewardOptionType type) { m_questRewardOption = type; };
+
 private:
     void InventoryIterateItemsInBags(IterateItemsVisitor* visitor);
     void InventoryIterateItemsInEquip(IterateItemsVisitor* visitor);   
@@ -568,6 +579,8 @@ protected:
     bool isPlayerFriend = false;
     bool isMovingToTransport = false;
     bool shouldLogOut = false;
+
+    QuestRewardOptionType m_questRewardOption;
 };
 
 template<typename T>
