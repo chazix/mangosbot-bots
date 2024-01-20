@@ -172,29 +172,29 @@ bool QuestRewardAction::Execute(Event& event)
 {
     Player* requester = event.getOwner() ? event.getOwner() : GetMaster();
     if (event.getParam() == "auto") {
-      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_OPTION_AUTO);
+      ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_OPTION_AUTO);
     }
     else if (event.getParam() == "list") {
-      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_OPTION_LIST);
+      ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_OPTION_LIST);
     }
     else if (event.getParam() == "ask") {
-      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_OPTION_ASK);
+      ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_OPTION_ASK);
     }
     else if (event.getParam() == "reset") {
-      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_CONFIG_DRIVEN);
+      ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_CONFIG_DRIVEN);
     }
     else if (event.getParam() == "?") {
       auto currentQuestRewardOption = ai->GetQuestRewardOptionType();
       ostringstream out;
-      out << "current: ["
+      out << "current: [";
       switch (currentQuestRewardOption) {
-        case PlayerbotAI::QUEST_REWARD_OPTION_AUTO:
+        case QuestRewardOptionType::QUEST_REWARD_OPTION_AUTO:
           out << "Auto";
           break;
-        case PlayerbotAI::QUEST_REWARD_OPTION_LIST:
+        case QuestRewardOptionType::QUEST_REWARD_OPTION_LIST:
           out << "List";
           break;
-        case PlayerbotAI::QUEST_REWARD_OPTION_ASK:
+        case QuestRewardOptionType::QUEST_REWARD_OPTION_ASK:
           out << "Ask";
           break;
         default:
