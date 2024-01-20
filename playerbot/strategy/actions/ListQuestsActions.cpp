@@ -167,3 +167,46 @@ int ListQuestsAction::ListQuests(Player* requester, bool completed, bool silent,
 
     return count;
 }
+
+bool QuestRewardAction::Execute(Event& event)
+{
+    Player* requester = event.getOwner() ? event.getOwner() : GetMaster();
+    if (event.getParam() == "auto") {
+      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_OPTION_AUTO);
+    }
+    else if (event.getParam() == "list") {
+      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_OPTION_LIST);
+    }
+    else if (event.getParam() == "ask") {
+      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_OPTION_ASK);
+    }
+    else if (event.getParam() == "reset") {
+      ai->SetQuestRewardOptionType(PlayerbotAI::QUEST_REWARD_CONFIG_DRIVEN);
+    }
+    else if (event.getParam() == "?") {
+      auto currentQuestRewardOption = ai->GetQuestRewardOptionType();
+      ostringstream out;
+      out << "current: ["
+      switch (currentQuestRewardOption) {
+        case PlayerbotAI::QUEST_REWARD_OPTION_AUTO:
+          out << "Auto";
+          break;
+        case PlayerbotAI::QUEST_REWARD_OPTION_LIST:
+          out << "List";
+          break;
+        case PlayerbotAI::QUEST_REWARD_OPTION_ASK:
+          out << "Ask";
+          break;
+        default:
+          out << "Config driven";
+          break;
+      }
+      out << "]";
+      ai->TellPlayer(requester, out);
+    }
+    else {
+      ai->TellPlayer(requester, "Usage: quest reward [auto|list|ask|reset|?]");
+    }
+
+    return true;
+}
