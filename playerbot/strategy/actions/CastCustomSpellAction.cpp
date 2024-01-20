@@ -216,7 +216,7 @@ bool CastCustomSpellAction::Execute(Event& event)
 
     // don't use reagent cheat if the bot is an alt of a real player
     bool reagentCheat = !ai->IsAlt();
-    bool result = spell ? ai->CastSpell(spell, target, itemTarget,true, &spellDuration) : ai->CastSpell(text, target, itemTarget, true, &spellDuration);
+    bool result = spell ? ai->CastSpell(spell, target, itemTarget,true, &spellDuration, reagentCheat) : ai->CastSpell(text, target, itemTarget, true, &spellDuration, reagentCheat);
     if (result)
     {
         SetDuration(spellDuration);
