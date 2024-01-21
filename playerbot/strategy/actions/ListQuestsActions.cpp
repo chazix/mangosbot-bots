@@ -186,7 +186,7 @@ bool QuestRewardAction::Execute(Event& event)
     else if (event.getParam() == "?") {
       auto currentQuestRewardOption = ai->GetQuestRewardOptionType();
       ostringstream out;
-      out << "current: [";
+      out << "Current: |cff00ff00";
       switch (currentQuestRewardOption) {
         case QuestRewardOptionType::QUEST_REWARD_OPTION_AUTO:
           out << "Auto";
@@ -198,7 +198,7 @@ bool QuestRewardAction::Execute(Event& event)
           out << "Ask";
           break;
         default:
-          out << "Config driven";
+          out << "Config Driven";
           break;
       }
       out << "]";
