@@ -73,6 +73,7 @@
 #include "BattleGroundJoinAction.h"
 #include "MoveStyleAction.h"
 #include "ValueActions.h"
+#include "QuestRewardActions.h"
 
 namespace ai
 {
