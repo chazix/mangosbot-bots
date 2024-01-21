@@ -76,6 +76,8 @@ bool RewardAction::Reward(Player* requester, uint32 itemId, Object* questGiver)
                     map<string, string> args;
                     args["%item"] = chat->formatItem(pRewardItem);
                     ai->TellPlayer(requester, BOT_TEXT2("quest_choose_reward", args));
+
+                    args["%quest"] = chat->formatQuest(pQuest);
                     ai->TellPlayer(requester, BOT_TEXT2("quest_status_complete_single_reward", args), PlayerbotSecurityLevel::PLAYERBOT_SECURITY_ALLOW_ALL, false);
 
                     return true;
