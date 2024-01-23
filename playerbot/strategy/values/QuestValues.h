@@ -217,4 +217,11 @@ namespace ai
         CanUseItemOn(PlayerbotAI* ai) : BoolCalculatedValue(ai, "can use item on"), Qualified() {}
         virtual bool Calculate() override;
     };
+
+    // quest reward
+    class QuestRewardValue : public ManualSetValue<uint8>, public Qualified
+    {
+    public:
+        QuestRewardValue(PlayerbotAI* ai);
+    };
 }
