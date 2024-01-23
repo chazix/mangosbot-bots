@@ -182,7 +182,7 @@ void TalkToQuestGiverAction::RewardMultipleItem(Player* requester, Quest const* 
 
     set<uint32> bestIds;
     ostringstream outid;
-    auto questRewardOption = ai->GetQuestRewardOptionType();
+    auto questRewardOption = static_cast<QuestRewardOptionType>(AI_VALUE(uint8, "quest reward"));
     if (!ai->IsAlt() ||
         questRewardOption == QuestRewardOptionType::QUEST_REWARD_CONFIG_DRIVEN && sPlayerbotAIConfig.autoPickReward == "yes" ||
         questRewardOption == QuestRewardOptionType::QUEST_REWARD_OPTION_AUTO

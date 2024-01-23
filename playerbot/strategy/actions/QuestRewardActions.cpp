@@ -8,19 +8,19 @@ bool QuestRewardAction::Execute(Event& event)
 {
     Player* requester = event.getOwner() ? event.getOwner() : GetMaster();
     if (event.getParam() == "auto") {
-        ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_OPTION_AUTO);
+        SET_AI_VALUE(uint8, "quest reward", static_cast<uint8>(QuestRewardOptionType::QUEST_REWARD_OPTION_AUTO));
     }
     else if (event.getParam() == "list") {
-        ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_OPTION_LIST);
+        SET_AI_VALUE(uint8, "quest reward", static_cast<uint8>(QuestRewardOptionType::QUEST_REWARD_OPTION_LIST));
     }
     else if (event.getParam() == "ask") {
-        ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_OPTION_ASK);
+        SET_AI_VALUE(uint8, "quest reward", static_cast<uint8>(QuestRewardOptionType::QUEST_REWARD_OPTION_ASK));
     }
     else if (event.getParam() == "reset") {
-        ai->SetQuestRewardOptionType(QuestRewardOptionType::QUEST_REWARD_CONFIG_DRIVEN);
+        SET_AI_VALUE(uint8, "quest reward", static_cast<uint8>(QuestRewardOptionType::QUEST_REWARD_CONFIG_DRIVEN));
     }
     else if (event.getParam() == "?") {
-        auto currentQuestRewardOption = ai->GetQuestRewardOptionType();
+        auto currentQuestRewardOption = static_cast<QuestRewardOptionType>(AI_VALUE(uint8, "quest reward"));
         ostringstream out;
         out << "Current: |cff00ff00";
         switch (currentQuestRewardOption) {
