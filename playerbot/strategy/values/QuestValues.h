@@ -25,8 +25,15 @@ namespace ai
         questGiver = 16,
         questTaker = 32,
         maxQuestRelationFlag = 64
-    };   
+    };
 
+    enum class QuestRewardOptionType : uint8
+    {
+        QUEST_REWARD_CONFIG_DRIVEN = 0x00,
+        QUEST_REWARD_OPTION_AUTO = 0x01,
+        QUEST_REWARD_OPTION_LIST = 0x02,
+        QUEST_REWARD_OPTION_ASK = 0x03,
+    };
 
     //                     questId, QuestRelationFlag
     typedef unordered_map <uint32, uint32> questRelationMap;
@@ -222,6 +229,8 @@ namespace ai
     class QuestRewardValue : public ManualSetValue<uint8>, public Qualified
     {
     public:
-        QuestRewardValue(PlayerbotAI* ai);
+        QuestRewardValue(PlayerbotAI* ai) :
+            ManualSetValue<uint8>(ai, static_cast<uint8>(QuestRewardOptionType::QUEST_REWARD_CONFIG_DRIVEN), "quest reward"),
+            Qualified() {}
     };
 }

@@ -248,14 +248,6 @@ enum BotRoles
     BOT_ROLE_DPS = 0x04
 };
 
-enum class QuestRewardOptionType : uint8
-{
-  QUEST_REWARD_CONFIG_DRIVEN = 0x00,
-  QUEST_REWARD_OPTION_AUTO   = 0x01,
-  QUEST_REWARD_OPTION_LIST   = 0x02,
-  QUEST_REWARD_OPTION_ASK    = 0x03,
-};
-
 class PacketHandlingHelper
 {
 public:

@@ -558,7 +558,3 @@ bool CanUseItemOn::Calculate()
 
 	return false;
 };
-
-QuestRewardValue::QuestRewardValue(PlayerbotAI* ai) :
-	ManualSetValue<uint8>(ai, static_cast<uint8>(QuestRewardOptionType::QUEST_REWARD_CONFIG_DRIVEN), "quest reward"),
-	Qualified() {}
