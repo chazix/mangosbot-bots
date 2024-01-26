@@ -3,6 +3,7 @@
 #include "../../playerbot.h"
 #include "TalkToQuestGiverAction.h"
 #include "../values/ItemUsageValue.h"
+#include "../values/QuestValues.h"
 
 using namespace ai;
 
