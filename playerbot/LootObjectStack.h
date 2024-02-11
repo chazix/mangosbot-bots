@@ -37,6 +37,7 @@ namespace ai
     public:
         LootTarget& operator=(LootTarget const& other);
         bool operator< (const LootTarget& other) const;
+        bool operator==(const LootTarget& other) const;
 
     public:
         ObjectGuid guid;
@@ -67,6 +68,7 @@ namespace ai
     private:
         Player* bot;
         LootTargetList availableLoot;
+        std::deque<LootTarget> recentlyEncounteredLoot;
     };
 
 };

@@ -4,11 +4,13 @@
 #include "PlayerbotAIConfig.h"
 #include "ServerFacade.h"
 #include "strategy/values/SharedValueContext.h"
+#include <deque>
 
 using namespace ai;
 using namespace std;
 
 #define MAX_LOOT_OBJECT_COUNT 10
+#define MAX_RECENTLY_ENCOUNTERED_LOOT 30
 
 LootTarget::LootTarget(ObjectGuid guid) : guid(guid), asOfTime(time(0))
 {
@@ -34,6 +36,11 @@ LootTarget& LootTarget::operator=(LootTarget const& other)
 bool LootTarget::operator< (const LootTarget& other) const
 {
     return guid < other.guid;
+}
+
+bool LootTarget::operator==(const LootTarget& other) const
+{
+    return guid == other.guid;
 }
 
 void LootTargetList::shrink(time_t fromTime)
@@ -279,6 +286,21 @@ bool LootObject::IsLootPossible(Player* bot)
 
 bool LootObjectStack::Add(ObjectGuid guid)
 {
+    auto gameObject = bot->GetMap()->GetGameObject(guid);
+    if (gameObject != nullptr) {
+        if (gameObject->GetGoType() == GAMEOBJECT_TYPE_TRAP) {
+            return false;
+        }
+    }
+
+    if (std::find(recentlyEncounteredLoot.begin(), recentlyEncounteredLoot.end(), guid) != recentlyEncounteredLoot.end())
+        return false;
+
+    if (recentlyEncounteredLoot.size() > MAX_RECENTLY_ENCOUNTERED_LOOT)
+        recentlyEncounteredLoot.pop_front();
+
+    recentlyEncounteredLoot.push_back(guid);
+
     if (!availableLoot.insert(guid).second)
         return false;
 
