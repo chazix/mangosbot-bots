@@ -291,15 +291,21 @@ bool LootObjectStack::Add(ObjectGuid guid)
         if (gameObject->GetGoType() == GAMEOBJECT_TYPE_TRAP) {
             return false;
         }
+
+        const auto& respawnTime = gameObject->GetRespawnTime();
+        const auto recentlyLootIter = std::find_if(
+            recentlyEncounteredLoot.begin(),
+            recentlyEncounteredLoot.end(),
+            [guid, respawnTime](const std::pair<LootTarget, time_t>& p) { return p.first == guid && p.second == respawnTime; });
+
+        if (recentlyLootIter != recentlyEncounteredLoot.end())
+            return false;
+
+        if (recentlyEncounteredLoot.size() > MAX_RECENTLY_ENCOUNTERED_LOOT)
+            recentlyEncounteredLoot.pop_front();
+
+        recentlyEncounteredLoot.push_back(std::make_pair(guid, respawnTime));
     }
-
-    if (std::find(recentlyEncounteredLoot.begin(), recentlyEncounteredLoot.end(), guid) != recentlyEncounteredLoot.end())
-        return false;
-
-    if (recentlyEncounteredLoot.size() > MAX_RECENTLY_ENCOUNTERED_LOOT)
-        recentlyEncounteredLoot.pop_front();
-
-    recentlyEncounteredLoot.push_back(guid);
 
     if (!availableLoot.insert(guid).second)
         return false;

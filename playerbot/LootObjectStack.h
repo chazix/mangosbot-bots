@@ -68,7 +68,7 @@ namespace ai
     private:
         Player* bot;
         LootTargetList availableLoot;
-        std::deque<LootTarget> recentlyEncounteredLoot;
+        std::deque<std::pair<LootTarget, time_t>> recentlyEncounteredLoot;
     };
 
 };
